@@ -6,5 +6,8 @@
 </head>
 <body>
 Hello
+{% if request.user.is_authenticated %}
+World
+{% endif %}
 </body>
 </html>
