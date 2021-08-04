@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
-Hello
-{% if request.user.is_authenticated %}
-World
-{% endif %}
-</body>
-</html>
+
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+    World
+    {% endif %}
+
+    {% for product in products %}
+
+        <div class="card" style="width: 18rem;">
+          <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+            <a href="{% url 'update_product_url' %}" class="btn btn-primary">Update</a>
+          </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}
