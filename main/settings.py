@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'cart',
     'product',
     'users',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -77,7 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
-
+CART_SESSION_ID = 'cart'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

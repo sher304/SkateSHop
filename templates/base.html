@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -30,6 +31,7 @@
           </ul>
         </li>
       </ul>
+      <a href="{% url 'cart_detail_url' %}"><img style="width: 30px; height: auto;" src="{% static 'images/carts.png' %}"></a>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>

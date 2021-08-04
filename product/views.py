@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from cart.cart import Cart
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
 
 from .models import Product
 from .forms import *
-
 
 
 
@@ -50,3 +51,47 @@ class DeleteProductView(DeleteView):
     pk_url_kwarg = 'id'
     def get_success_url(self):
         return reverse('home_page_url')
+
+
+@login_required()
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect('home_page_url')
+
+
+@login_required()
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect('cart_detail_url')
+
+
+@login_required()
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect('cart_detail_url')
+
+
+@login_required()
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect('cart_detail_url')
+
+
+@login_required()
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect('cart_detail_url')
+
+
+@login_required()
+def cart_detail(request):
+    return render(request, 'cart_detail.html')
