@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.urls import reverse
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
 
 from .models import Product
 from .forms import *
+
+
 
 
 class ProductListView(ListView):
@@ -38,4 +40,13 @@ class UpdateProductView(UpdateView):
         context['product_form'] = self.get_form(self.get_form_class())
         return context
 
+    def get_success_url(self):
+        return reverse('home_page_url')
 
+
+class DeleteProductView(DeleteView):
+    model = Product
+    template_name = 'delete_product.html'
+    pk_url_kwarg = 'id'
+    def get_success_url(self):
+        return reverse('home_page_url')
