@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="margin: 5%">
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+  <div class="card-body rounded-2" style="border: thin; border-radius: 10px;
+                      height: 240px; width: 40%; margin-bottom: 8%;">
+    <div style="padding-left: 2%;" align="end">
+      <span style="font-size: 30px;">
+        <b>Total: {{ total }} $</b>
+      </span>
+    </div>
+    <hr>
+    <section class="product_section" style="margin-top: 20%;">
+      <div class="btn_box">
+        <button class="btn btn-outline-success" type="submit" style="width: 150px; font-size: 20px">BUY</button>
+      </div>
+    </section>
+  </div>
+</form>
+</div>
+{% endblock %}

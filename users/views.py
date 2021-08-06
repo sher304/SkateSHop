@@ -4,10 +4,11 @@ from django.views.generic import CreateView
 
 from product.models import Product
 from .forms import RegistrationForm
+from .models import CustomUser
 
 
 class RegisterView(CreateView):
-	model = Product
+	model = CustomUser
 	template_name = 'register.html'
 	form_class = RegistrationForm
 

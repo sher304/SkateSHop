@@ -27,5 +27,7 @@ urlpatterns = [
     path('home/', HomePageView.as_view(), name='home_page_url'),
     path('admin/', admin.site.urls),
     path('account/', include('users.urls')),
+
 ]+static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
+# +static(settings.STATIC.URL, document_root=STATIC_ROOT)
 

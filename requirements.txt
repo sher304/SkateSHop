@@ -4,3 +4,6 @@ Pillow
 python-decouple
 django-crispy-forms
 django-shopping-cart
+pytz
+sqlparse
+django-allauth

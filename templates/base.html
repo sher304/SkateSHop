@@ -1,46 +1,225 @@
 <!DOCTYPE html>
+<html>
 {% load static %}
-<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>{% block title %} Skate Shop {% endblock %}</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-success">
-  <div class="container-fluid">
-    <a class="navbar-brand" style="color: white;" href="{% url 'home_page_url' %}">Skate Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home_page_url' %}">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menu
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'create_product_url' %}">Add Product</a></li>
-            <li><a class="dropdown-item" href="{% url 'register_page_url'%}">Register</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'login_page_url' %}">Login</a></li>
-          </ul>
-        </li>
-      </ul>
-      <a href="{% url 'cart_detail_url' %}"><img style="width: 30px; height: auto;" src="{% static 'images/carts.png' %}"></a>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-{% block content %}
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <title>{% block title %}SkateShop{% endblock %}</title>
 
-{% endblock%}
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+<div class="hero_area">
+  <!-- header section strats -->
+  <header class="header_section">
+    <div class="header_top">
+      <div class="container-fluid">
+        <div class="top_nav_container">
+          <form class="d-flex" method="get" action="{% url 'search_product_url' %}">
+            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          <div class="user_option_box">
+            <a href="{% url 'cart_detail_url' %}" class="cart-link">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <span>
+Cart
+</span>
+            </a>
+            {% if request.user.is_staff %}
+            <a href="{% url 'create_product_url' %}" class="cart-link">
+<span>
+Add Product
+</span>
+            </a>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header_bottom">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="{% url 'home_page_url' %}">
+<span>
+SkateShop
+</span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home_page_url' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'product_list_url' %}">Products</a>
+              </li>
+              {% if not request.user.is_authenticated %}
+              <li class="nav-item">
+
+                <a class="nav-link" href="{% url 'login_page_url' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register_page_url' %}">Register</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% endif%}
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {% block content %}
+
+  {% endblock %}
+
+  <!-- footer section -->
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h5>
+              <a href="" class="navbar-brand">
+<span>
+SkateShop
+</span>
+              </a>
+            </h5>
+            <p>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              Address Bishkek
+            </p>
+            <p>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              +996 777 77 77 77
+            </p>
+            <p>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              skateshop@gmail.com
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Information
+            </h5>
+            <p>
+              Проект состоит из 150% усердия. <br> А так же из качественной и слаженной работы.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_links">
+            <h5>
+              Useful Link
+            </h5>
+            <ul>
+              <li>
+                <a href="{% url 'home_page_url' %}">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'product_list_url' %}">
+                  Products
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_form ">
+            <h5>
+              Join Us
+            </h5>
+            <form action="">
+              <a style="margin-left: 1px;" href="{% url 'login_page_url' %}"><button type="button">
+                Login
+              </button>
+              </a>
+              <a href="{% url 'register_page_url' %}"><button type="button">
+                Register
+              </button>
+              </a>
+
+            </form>
+            <div class="social_box">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span>
+        <a href="https://html.design/"></a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+</div>
 </body>
+
 </html>
+

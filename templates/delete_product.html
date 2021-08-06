@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method="post">
+<form method="post" style="margin-top: 5%; margin-bottom: 25%; margin-left: 20%;">
     <h1>Are you sure? Do you really want to delete this product? </h1>
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Yes</button>
-    <a href="{% url 'home_page_url' %}"><button type="button" class="btn btn-dark">No</button></a>
-
+    <div style="margin-left: 30%; margin-top: 5%;">
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a href="{% url 'home_page_url' %}"><button type="button" class="btn btn-dark">No</button></a>
+    </div>
 </form>
 
 {% endblock %}

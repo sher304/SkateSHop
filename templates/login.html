@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-{% load crispy_forms_tags %}
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
-<form method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{%block title %}SignIn{%endblock%}
+
+{% block content %}
+
+<section class="client_section layout_padding">
+    <div class="container">
+      <h1 style="margin-bottom: 3%;">Login</h1>
+      <div class="heading_container">
+        <form method="post" action="{% url 'login_page_url' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}
