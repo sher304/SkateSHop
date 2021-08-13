@@ -7,3 +7,4 @@ django-shopping-cart
 pytz
 sqlparse
 django-allauth
+gunicorn==20.0.4
