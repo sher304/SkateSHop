@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<title>{% block title %}SkateShop{% endblock %}</title>
+
+  <h1 style="margin-left: 2%; margin-top: 2%;">Search Results: </h1>
+
+    {% for product in products %}
+        <div class="card mt-5" style="width: 20rem; margin-left: 40%; margin-bottom: 5%;">
+          <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <a href="{% url 'product_detail_url' product.id %}"><h5 class="card-title">{{ product.name }}</h5></a>
+            <p>${{ product.price}}</p>
+            <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+
+          </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}
+

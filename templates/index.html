@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content %}
+
+    <!-- slider section -->
+    <section class="slider_section ">
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="detail-box">
+                    <h1>
+                      Welcome to Skate shop
+                    </h1>
+                    <a href="">
+                      Read More
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="{% static 'images/bg_board.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="detail-box">
+                    <h1>
+                      Welcome to our shop
+                    </h1>
+                    <p>
+
+                    </p>
+                    <a href="">
+                      Read More
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="{% static 'images/bg_board2.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel_btn_box">
+          <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+
+  <!-- product section -->
+  <div class="heading_container heading_center" style="margin-top: 5%; margin-bottom: -8%">
+          <h1 style="font-size: 60px;">
+          Recent added products
+        </h1>
+  </div>
+
+
+  <div class="products" style="padding: 15% 15%">
+{% if products  %}
+    {% for product in products %}
+
+      <div class="">
+          <div class="box">
+            <div class="img-box">
+              <img src="{{ product.image.url }}" alt="">
+              {% if product.status == 'in stock' %}
+                <a href="{% url 'cart_add_url' product.id %}" class="add_cart_btn">
+                  <span>
+                    Add To Cart
+                  </span>
+                </a>
+              </div>
+            {% else %}
+            <a href="{% url 'cart_add_url' product.id %}" class="add_cart_btn">
+                  <span>
+                    Add To Cart
+                  </span>
+                </a>
+            {% endif %}
+            <div class="detail-box">
+              <h5>
+                <a href="{% url 'product_detail_url' product.id %}">{{ product.name }}</a>
+              </h5>
+              <div class="product_info">
+                <h5>
+                  ${{ product.price }}
+                </h5>
+              <p class="card-text" style="margin-top:1%;">{{ product.status }}</p>
+                <div class="star_container">
+                  <i class="fa fa-heart" aria-hidden="true" style="width: 25px; height: 20px;"></i>
+                  <span style="font-size: 18px;">Likes: {{ product.total_likes }}</span>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+          {% endfor %}
+
+    {% else %}
+    <h1>Products will add soon...</h1>
+
+{% endif%}
+
+  </div>
+  <!-- end product section -->
+
+  <!-- about section -->
+
+  <section class="about_section">
+    <div class="container-fluid  ">
+      <div class="row">
+        <div class="col-md-5 ml-auto">
+          <div class="detail-box pr-md-3">
+            <div class="heading_container">
+              <h2>
+                About us
+              </h2>
+            </div>
+            <p>
+              Это проект был поднят за 3 дня, во время хакатона. <br>
+              Сделали Эшеров Шермат и Бараканов Жаангер.
+            </p>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 px-0">
+          <div class="img-box" style="height: 750px;">
+            <img src="{% static 'images/bg3.jpg' %}" style="height: 100%" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- why us section -->
+
+  <section class="why_us_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Why Choose Us
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="img-box">
+            <img src="{% static 'images/w1.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Fast Delivery
+              </h5>
+              <p>
+                We have Sonic deliveries
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="img-box">
+              <img src="{% static 'images/w2.png' %}" alt="">
+
+            </div>
+            <div class="detail-box">
+              <h5>
+                Cheap prices
+              </h5>
+              <p>
+                With fast delivery
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="img-box">
+              <img src="{% static 'images/w3.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Best Quality
+              </h5>
+              <p>
+                Just trust us
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end why us section -->
+
+
+  <!-- client section -->
+
+
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span>
+        <a href="https://html.design/"></a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+
+
+{% endblock %}

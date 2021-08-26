@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- product section -->
+{% block content %}
+
+
+<div class="products" style=" margin-top: 3%;">
+  {% for product in products %}
+  <div class="row">
+    <div class="box">
+      <div class="img-box">
+        <img src="{{ product.image.url }}" alt="">
+        {% if product.status == 'in stock' %}
+        <a href="{% url 'cart_add_url' product.id %}" class="add_cart_btn">
+                  <span>
+                    Add To Cart
+                  </span>
+          {% else %}
+            <a class="add_cart_btn">
+                  <span>
+                    Out of stock
+                  </span>
+                </a>
+         {%endif%}
+        </a>
+
+      </div>
+      <div class="detail-box">
+        <h5>
+          <a href="{% url 'product_detail_url' product.id %}">{{ product.name }}</a>
+        </h5>
+        <div class="product_info">
+          <h5>
+            ${{ product.price }}
+          </h5>
+          <div class="star_container">
+            <i class="fa fa-heart" aria-hidden="true" style="width: 25px; height: 20px;"></i>
+            Likes: {{ product.total_likes }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+
+      <a class="page-link" href="{% url 'product_list_url' %}?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    {% endif %}
+
+    <li class="page-item"><a class="page-link" href="">{{ page_obj.number }}</a></li>
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+
+      <a class="page-link" href="{% url 'product_list_url' %}?page={{ page_obj.next_page_number }}">Next</a>
+    </li>
+    {% endif %}
+
+  </ul>
+</nav>
+
+
+<!-- end product section -->
+
+{% endblock %}

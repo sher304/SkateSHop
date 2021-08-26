@@ -1,0 +1,100 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+{% if not request.session.cart.items %}
+  <div class="" style="padding: 4%; margin-bottom: 8%;">
+    <div>
+      <span style="font-size: 40px">Cart is empty</span>
+    </div>
+    <hr style="margin: 3% 0;">
+    <div class="card-body rounded-2" style="border: 1px solid #4e1f9d; border-radius: 10px;">
+      <span style="font-size: 22px">No items yet...</span>
+    </div>
+    <section class="product_section">
+      <div class="btn_box">
+        <a href="{% url 'home_page_url' %}" class="view_more-link">
+          GO TO HOMEPAGE
+        </a>
+      </div>
+    </section>
+  </div>
+{% else %}
+<div class="" style="padding: 4%; margin-bottom: -2%;">
+  <div>
+    <span style="font-size: 40px">Cart</span>
+  </div>
+  <hr style="margin: 3% 0;">
+
+  {% for key, product in request.session.cart.items %}
+
+  <div class="card-body rounded-2 row" style="border: 1px solid #4e1f9d; border-radius: 10px; margin-bottom: 20px;">
+    <img src="{{ product.image }}" style="max-height: 200px; max-width: 200px">
+    <div style="padding-left: 2%; margin-top: 2%;">
+      <span style="font-size: 35px;">
+        {{ product.name }}
+      </span>
+      <br>
+      <span style="font-size: 20px;">
+        {{ product.description }}
+      </span>
+    </div>
+    <div style="margin: auto; width: 15%; padding: 10px; margin-top: -6%">
+      <div>
+        {% if product.quantity == 1 %}
+        <button class="" style="border: 2px solid lightgrey; background-color: #fff;
+                    font-size: 25px; height: 1.8em; width: 1.8em;
+                    border-radius: 999px;" disabled>-
+        </button>
+        {% else %}
+        <a href="{% url 'item_decrement_url' key %}">
+          <button class="" style="border: 2px solid lightgrey; background-color: #fff;
+                      font-size: 25px; height: 1.8em; width: 1.8em;
+                      border-radius: 999px;">-
+          </button>
+        </a>
+        {% endif %}
+        <span style="font-size: 20px; margin: 7%;">{{ product.quantity }}</span>
+        <a href="{% url 'item_increment_url' key %}">
+          <button class="" style="border: 2px solid lightgrey; background-color: #fff;
+                      font-size: 25px; height: 1.8em; width: 1.8em;
+                      border-radius: 999px;">+
+          </button>
+        </a>
+      </div>
+    </div>
+    <div style="margin-left: 1.5%">
+      <span style="font-size: 22px;"><b> ${{ product.price|multiply:product.quantity }}</b></span>
+    </div>
+  </div>
+  {% endfor %}
+
+
+<section class="product_section" style="margin-bottom: 5%; margin-right: 6%">
+  <div class="btn_box">
+    <a href="{% url 'cart_clear_url' %}" class="view_more-link">
+      CLEAR
+    </a>
+  </div>
+</section>
+<div class="card-body rounded-2" style="border: 1px solid #4e1f9d; border-radius: 10px;
+                    height: 240px; width: 40%; margin-bottom: 8%;">
+  <div style="padding-left: 2%;" align="end">
+    <span style="font-size: 30px;">
+      <b>Total: {{ total }} $</b>
+    </span>
+  </div>
+  <hr>
+  <section class="product_section" style="margin-top: 13%;">
+    <div class="btn_box">
+      <a href="{% url 'product_buy_url' %}" class="view_more-link">
+        PROCEED TO CHECKOUT
+      </a>
+    </div>
+  </section>
+</div>
+</div>
+{% endif %}
+{% endblock %}
